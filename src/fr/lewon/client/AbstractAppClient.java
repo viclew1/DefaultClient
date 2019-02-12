@@ -5,6 +5,7 @@ import java.util.Properties;
 import java.util.stream.Collectors;
 
 import fr.lewon.client.exceptions.CliException;
+import fr.lewon.client.exceptions.InitializationException;
 import fr.lewon.client.exceptions.MissingParameterException;
 import fr.lewon.client.menus.Menu;
 import fr.lewon.client.menus.MenuRunner;
@@ -19,8 +20,9 @@ public abstract class AbstractAppClient {
 	
 	/**
 	 * Initializes the tools
+	 * @throws InitializationException 
 	 */
-	protected abstract void initUtils();
+	protected abstract void initUtils() throws InitializationException;
 	
 	/**
 	 * Initializes the parameters by looking for their values in system properties.
