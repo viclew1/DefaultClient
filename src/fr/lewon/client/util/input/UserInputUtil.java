@@ -46,10 +46,10 @@ public enum UserInputUtil {
 		System.out.println(prompt + (needed ? "" : " (ENTER to skip)"));
 		while (true) {
 			String inputStr = getNextLine(hidden);
-			if (!needed && inputStr == null) {
-				return null;
-			}
 			if ("".equals(inputStr)) {
+				if (!needed) {
+					return null;
+				}
 				System.out.println("Invalid value - Empty input");
 				continue;
 			}
