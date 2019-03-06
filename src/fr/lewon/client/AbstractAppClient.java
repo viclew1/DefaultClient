@@ -8,7 +8,6 @@ import fr.lewon.client.exceptions.CliException;
 import fr.lewon.client.exceptions.InitializationException;
 import fr.lewon.client.exceptions.MissingParameterException;
 import fr.lewon.client.menus.Menu;
-import fr.lewon.client.menus.MenuRunner;
 import fr.lewon.client.util.parameters.Parameter;
 
 public abstract class AbstractAppClient {
@@ -46,15 +45,41 @@ public abstract class AbstractAppClient {
 	 */
 	protected abstract Menu getHomeMenu();
 	
-	public void run() throws CliException {
+	/**
+	 * Processes all the steps to launch the client :
+	 * <ul>
+	 * <li>Calls {@link #init()}</li>
+	 * <li>Calls {@link #run()}</li>
+	 * </ul>
+	 * @throws CliException 
+	 */
+	public void launch() throws CliException {
+		init();
+		run();
+	}
+	
+	/**
+	 * Processes all the initialization steps :
+	 * <ul>
+	 * <li>Calls {@link #initParams(List)}</li>
+	 * <li>Verifies every initialized parameter</li>
+	 * <li>Calls {@link #initUtils()}</li>
+	 * </ul>
+	 * @throws CliException
+	 */
+	protected void init() throws CliException {
 		List<Parameter> params = getParamsToInit();
 		initParams(params);
 		for (Parameter param : params) {
 			param.verify();
 		}
 		initUtils();
-		
-		MenuRunner.INSTANCE.runMenu(getHomeMenu());
 	}
 	
+	/**
+	 * Should contain the actions the client should execute once everything is successfully initialized
+	 * 
+	 * @throws CliException
+	 */
+	protected abstract void run() throws CliException;
 }
