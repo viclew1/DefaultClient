@@ -19,7 +19,7 @@ public abstract class Parameter {
 	
 	public boolean initParameter(Properties props) {
 		this.value = props.getProperty(key);
-		if (this.value == null && !this.required) {
+		if (this.value == null && this.required) {
 			return false;
 		}
 		return true;
