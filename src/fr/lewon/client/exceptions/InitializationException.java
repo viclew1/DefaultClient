@@ -9,7 +9,11 @@ public class InitializationException extends CliException {
 	}
 	
 	public InitializationException(Exception e) {
-		super("Initialization KO", e);
+		this("Initialization KO", e);
 	}
 
+	public InitializationException(String message, Exception e) {
+		super(message, e);
+	}
+	
 }
