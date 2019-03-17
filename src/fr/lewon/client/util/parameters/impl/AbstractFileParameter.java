@@ -21,14 +21,14 @@ public abstract class AbstractFileParameter extends Parameter {
 		File f = new File(getValue());
 
 		File parentFile = f.getParentFile();
-		
+
 		if (!parentFile.exists() || !parentFile.isDirectory() || !parentFile.canWrite()) {
 			throw new ParentDirDoesNotExist(this, parentFile.getAbsolutePath());
 		}
-		
+
 		if (!f.exists()) {
 			if (mustExist) {
-			throw new FileDoesNotExistException(this);
+				throw new FileDoesNotExistException(this);
 			} else {
 				initFile(f);
 			}
@@ -38,7 +38,7 @@ public abstract class AbstractFileParameter extends Parameter {
 	}
 
 	protected abstract void initFile(File f) throws CliException;
-	
+
 	protected abstract void processAdditionalVerifications(File f) throws CliException;
-	
+
 }

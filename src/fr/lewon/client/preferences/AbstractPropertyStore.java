@@ -12,18 +12,18 @@ import fr.lewon.client.exceptions.InitializationException;
 public abstract class AbstractPropertyStore {
 
 	private Properties props = new Properties();
-	
-	public void init(String proxyPropsFilePath) throws InitializationException {
-		try (InputStream is = new FileInputStream(proxyPropsFilePath)) {
+
+	public void init(String filePath) throws InitializationException {
+		try (InputStream is = new FileInputStream(filePath)) {
 			props.load(is);
 		} catch (IOException e) {
 			throw new InitializationException(e);
 		}
 		verifyNeededKeys();
 	}
-	
+
 	protected abstract List<String> getNeededKeys();
-	
+
 	private void verifyNeededKeys() throws InitializationException {
 		List<String> missingKeys = new ArrayList<>();
 		for (String key : getNeededKeys()) {
@@ -35,9 +35,9 @@ public abstract class AbstractPropertyStore {
 			throw new InitializationException("Missing properties :" + missingKeys, null);
 		}
 	}
-	
+
 	protected Properties getProperties() {
 		return props;
 	}
-	
+
 }
