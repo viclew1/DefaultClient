@@ -10,9 +10,9 @@ import fr.lewon.client.util.input.UserInputUtil;
 public abstract class Menu extends AbstractMenu {
 
 	private String description;
-	
-	public Menu(AbstractMenu containingMenu, String label, String description) {
-		super(containingMenu, label);
+
+	public Menu(AbstractMenu containingMenu, String description) {
+		super(containingMenu);
 		this.description = description;
 	}
 
@@ -29,7 +29,7 @@ public abstract class Menu extends AbstractMenu {
 		List<Choice<AbstractMenu>> choices = menus.stream()
 				.map(m -> new Choice<>(m.getLabel(), m))
 				.collect(Collectors.toList());
-		
+
 		return UserInputUtil.INSTANCE.askChoice(description, true, choices);
 	}
 

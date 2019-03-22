@@ -4,8 +4,8 @@ import fr.lewon.client.exceptions.ActionException;
 
 public abstract class Action extends AbstractMenu {
 
-	public Action(AbstractMenu containingMenu, String label) {
-		super(containingMenu, label);
+	public Action(AbstractMenu containingMenu) {
+		super(containingMenu);
 	}
 
 	@Override
