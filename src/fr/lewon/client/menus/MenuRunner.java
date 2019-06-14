@@ -1,12 +1,12 @@
 package fr.lewon.client.menus;
 
-import fr.lewon.client.exceptions.CliException;
+import fr.lewon.client.exceptions.ParameterizedAppException;
 
 public enum MenuRunner {
 
 	INSTANCE;
 	
-	public void runMenu(Menu root) throws CliException {
+	public void runMenu(Menu root) throws ParameterizedAppException {
 		AbstractMenu previousMenu = null;
 		AbstractMenu nextMenu = root;
 		while (nextMenu != null) {

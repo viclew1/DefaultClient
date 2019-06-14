@@ -1,6 +1,6 @@
 package fr.lewon.client.exceptions;
 
-public class InitializationException extends CliException {
+public class InitializationException extends ParameterizedAppException {
 
 	private static final long serialVersionUID = 4767328399146461498L;
 

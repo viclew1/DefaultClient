@@ -2,7 +2,7 @@ package fr.lewon.client.util.parameters;
 
 import java.util.Properties;
 
-import fr.lewon.client.exceptions.CliException;
+import fr.lewon.client.exceptions.ParameterizedAppException;
 
 public abstract class Parameter {
 
@@ -25,14 +25,14 @@ public abstract class Parameter {
 		return true;
 	}
 
-	public void verify() throws CliException {
+	public void verify() throws ParameterizedAppException {
 		if (getValue() == null && !isRequired()) {
 			return;
 		}
 		processVerifications();
 	}
 	
-	protected abstract void processVerifications() throws CliException;
+	protected abstract void processVerifications() throws ParameterizedAppException;
 	
 	public String getKey() {
 		return key;

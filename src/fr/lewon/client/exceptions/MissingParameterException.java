@@ -5,7 +5,7 @@ import java.util.List;
 
 import fr.lewon.client.util.parameters.Parameter;
 
-public class MissingParameterException extends CliException {
+public class MissingParameterException extends ParameterizedAppException {
 
 	private static final long serialVersionUID = -3221949866357848023L;
 

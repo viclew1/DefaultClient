@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
-import fr.lewon.client.exceptions.CliException;
+import fr.lewon.client.exceptions.ParameterizedAppException;
 import fr.lewon.client.exceptions.InitializationException;
 import fr.lewon.client.exceptions.MissingParameterException;
 import fr.lewon.client.util.parameters.Parameter;
@@ -45,9 +45,9 @@ public abstract class AbstractParameterizedApp {
 	 * <li>Calls {@link #init()}</li>
 	 * <li>Calls {@link #run()}</li>
 	 * </ul>
-	 * @throws CliException 
+	 * @throws ParameterizedAppException 
 	 */
-	public void launch() throws CliException {
+	public void launch() throws ParameterizedAppException {
 		init();
 		run();
 	}
@@ -59,9 +59,9 @@ public abstract class AbstractParameterizedApp {
 	 * <li>Verifies every initialized parameter</li>
 	 * <li>Calls {@link #initUtils()}</li>
 	 * </ul>
-	 * @throws CliException
+	 * @throws ParameterizedAppException
 	 */
-	protected void init() throws CliException {
+	protected void init() throws ParameterizedAppException {
 		List<Parameter> params = getParamsToInit();
 		initParams(params);
 		for (Parameter param : params) {
@@ -73,7 +73,7 @@ public abstract class AbstractParameterizedApp {
 	/**
 	 * Should contain the actions the client should execute once everything is successfully initialized
 	 * 
-	 * @throws CliException
+	 * @throws ParameterizedAppException
 	 */
-	protected abstract void run() throws CliException;
+	protected abstract void run() throws ParameterizedAppException;
 }

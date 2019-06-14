@@ -3,7 +3,7 @@ package fr.lewon.client.util.parameters.impl;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
-import fr.lewon.client.exceptions.CliException;
+import fr.lewon.client.exceptions.ParameterizedAppException;
 import fr.lewon.client.exceptions.InvalidEnumException;
 import fr.lewon.client.util.ICliEnum;
 import fr.lewon.client.util.parameters.Parameter;
@@ -24,7 +24,7 @@ public class EnumParameter<E extends Enum<E> & ICliEnum> extends Parameter {
 	}
 
 	@Override
-	protected void processVerifications() throws CliException {
+	protected void processVerifications() throws ParameterizedAppException {
 		ICliEnum enumVal = Enum.valueOf(enumClass, getValue());
 		if (enumVal == null) {
 			throw new InvalidEnumException(this);

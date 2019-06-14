@@ -3,7 +3,7 @@ package fr.lewon.client.menus;
 import java.io.IOException;
 import java.rmi.ServerException;
 
-import fr.lewon.client.exceptions.CliException;
+import fr.lewon.client.exceptions.ParameterizedAppException;
 
 public abstract class AbstractMenu {
 
@@ -20,7 +20,7 @@ public abstract class AbstractMenu {
 	 * @throws IOException
 	 * @throws ServerException
 	 */
-	public abstract AbstractMenu run(AbstractMenu caller) throws CliException;
+	public abstract AbstractMenu run(AbstractMenu caller) throws ParameterizedAppException;
 
 	public abstract String getLabel();
 

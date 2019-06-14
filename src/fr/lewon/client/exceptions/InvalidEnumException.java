@@ -6,7 +6,7 @@ import java.util.List;
 import fr.lewon.client.util.ICliEnum;
 import fr.lewon.client.util.parameters.impl.EnumParameter;
 
-public class InvalidEnumException extends CliException {
+public class InvalidEnumException extends ParameterizedAppException {
 
 	private static final long serialVersionUID = -5659535491623101072L;
 

@@ -3,7 +3,7 @@ package fr.lewon.client.menus;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import fr.lewon.client.exceptions.CliException;
+import fr.lewon.client.exceptions.ParameterizedAppException;
 import fr.lewon.client.util.input.Choice;
 import fr.lewon.client.util.input.UserInputUtil;
 
@@ -17,7 +17,7 @@ public abstract class Menu extends AbstractMenu {
 	}
 
 	@Override
-	public AbstractMenu run(AbstractMenu caller) throws CliException {
+	public AbstractMenu run(AbstractMenu caller) throws ParameterizedAppException {
 		System.out.println("\n############\n");
 		System.out.println(getLabel());
 

@@ -2,7 +2,7 @@ package fr.lewon.client.exceptions;
 
 import fr.lewon.client.util.parameters.Parameter;
 
-public class ParentDirDoesNotExist extends CliException {
+public class ParentDirDoesNotExist extends ParameterizedAppException {
 
 	private static final long serialVersionUID = 6069448444950090073L;
 

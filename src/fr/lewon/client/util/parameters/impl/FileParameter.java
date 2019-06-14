@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import fr.lewon.client.exceptions.CantCreateFileException;
-import fr.lewon.client.exceptions.CliException;
+import fr.lewon.client.exceptions.ParameterizedAppException;
 import fr.lewon.client.exceptions.NotAFileException;
 
 public class FileParameter extends AbstractFileParameter {
@@ -14,14 +14,14 @@ public class FileParameter extends AbstractFileParameter {
 	}
 
 	@Override
-	protected void processAdditionalVerifications(File f) throws CliException {
+	protected void processAdditionalVerifications(File f) throws ParameterizedAppException {
 		if (f.exists() && !f.isFile()) {
 			throw new NotAFileException(this);
 		}
 	}
 
 	@Override
-	protected void initFile(File f) throws CliException {
+	protected void initFile(File f) throws ParameterizedAppException {
 		try {
 			f.createNewFile();
 		} catch (IOException e) {

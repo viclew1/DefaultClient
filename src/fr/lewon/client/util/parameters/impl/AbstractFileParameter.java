@@ -2,7 +2,7 @@ package fr.lewon.client.util.parameters.impl;
 
 import java.io.File;
 
-import fr.lewon.client.exceptions.CliException;
+import fr.lewon.client.exceptions.ParameterizedAppException;
 import fr.lewon.client.exceptions.FileDoesNotExistException;
 import fr.lewon.client.exceptions.ParentDirDoesNotExist;
 import fr.lewon.client.util.parameters.Parameter;
@@ -17,7 +17,7 @@ public abstract class AbstractFileParameter extends Parameter {
 	}
 
 	@Override
-	protected void processVerifications() throws CliException {
+	protected void processVerifications() throws ParameterizedAppException {
 		File f = new File(getValue());
 
 		File parentFile = f.getParentFile();
@@ -37,8 +37,8 @@ public abstract class AbstractFileParameter extends Parameter {
 		processAdditionalVerifications(f);
 	}
 
-	protected abstract void initFile(File f) throws CliException;
+	protected abstract void initFile(File f) throws ParameterizedAppException;
 
-	protected abstract void processAdditionalVerifications(File f) throws CliException;
+	protected abstract void processAdditionalVerifications(File f) throws ParameterizedAppException;
 
 }

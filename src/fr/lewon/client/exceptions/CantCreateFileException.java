@@ -2,7 +2,7 @@ package fr.lewon.client.exceptions;
 
 import fr.lewon.client.util.parameters.Parameter;
 
-public class CantCreateFileException extends CliException {
+public class CantCreateFileException extends ParameterizedAppException {
 
 	private static final long serialVersionUID = 7052795718213554871L;
 

@@ -1,6 +1,6 @@
 package fr.lewon.client.util.parameters.impl;
 
-import fr.lewon.client.exceptions.CliException;
+import fr.lewon.client.exceptions.ParameterizedAppException;
 import fr.lewon.client.util.parameters.Parameter;
 
 public class SimpleParameter extends Parameter {
@@ -10,7 +10,7 @@ public class SimpleParameter extends Parameter {
 	}
 
 	@Override
-	protected void processVerifications() throws CliException {
+	protected void processVerifications() throws ParameterizedAppException {
 		// Nothing to do in this case
 	}
 

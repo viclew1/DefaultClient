@@ -1,6 +1,6 @@
 package fr.lewon.client.exceptions;
 
-public class ActionException extends CliException {
+public class ActionException extends ParameterizedAppException {
 
 	private static final long serialVersionUID = -2699904406080200457L;
 
