@@ -7,10 +7,9 @@ import java.util.stream.Collectors;
 import fr.lewon.client.exceptions.CliException;
 import fr.lewon.client.exceptions.InitializationException;
 import fr.lewon.client.exceptions.MissingParameterException;
-import fr.lewon.client.menus.Menu;
 import fr.lewon.client.util.parameters.Parameter;
 
-public abstract class AbstractAppClient {
+public abstract class AbstractParameterizedApp {
 	
 	/**
 	 * @return The List of Parameters needed by this client. These will be looked for in the System properties.
@@ -39,11 +38,6 @@ public abstract class AbstractAppClient {
 			throw new MissingParameterException(missingParameters);
 		}
 	}
-	
-	/**
-	 * @return The home menu of the user interface tree
-	 */
-	protected abstract Menu getHomeMenu();
 	
 	/**
 	 * Processes all the steps to launch the client :
