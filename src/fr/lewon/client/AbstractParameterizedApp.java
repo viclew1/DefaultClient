@@ -4,9 +4,8 @@ import java.util.List;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
-import fr.lewon.client.exceptions.ParameterizedAppException;
-import fr.lewon.client.exceptions.InitializationException;
 import fr.lewon.client.exceptions.MissingParameterException;
+import fr.lewon.client.exceptions.ParameterizedAppException;
 import fr.lewon.client.util.parameters.Parameter;
 
 public abstract class AbstractParameterizedApp {
@@ -15,12 +14,6 @@ public abstract class AbstractParameterizedApp {
 	 * @return The List of Parameters needed by this client. These will be looked for in the System properties.
 	 */
 	protected abstract List<Parameter> getParamsToInit();
-	
-	/**
-	 * Initializes the tools
-	 * @throws InitializationException 
-	 */
-	protected abstract void initUtils() throws InitializationException;
 	
 	/**
 	 * Initializes the parameters by looking for their values in system properties.
@@ -57,7 +50,6 @@ public abstract class AbstractParameterizedApp {
 	 * <ul>
 	 * <li>Calls {@link #initParams(List)}</li>
 	 * <li>Verifies every initialized parameter</li>
-	 * <li>Calls {@link #initUtils()}</li>
 	 * </ul>
 	 * @throws ParameterizedAppException
 	 */
@@ -67,7 +59,6 @@ public abstract class AbstractParameterizedApp {
 		for (Parameter param : params) {
 			param.verify();
 		}
-		initUtils();
 	}
 	
 	/**
