@@ -1,19 +1,17 @@
 package fr.lewon.client.util.input;
 
-import java.io.Console;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.function.Function;
 
-public enum UserInputUtil {
+public class UserInputReader {
 
-	INSTANCE;
+	private final IInputReader reader;
 
-	private final Console console;
-
-	private UserInputUtil() {
-		console = System.console();
+	protected UserInputReader(IInputReader reader) {
+		this.reader = reader;
 	}
 
 	/**
@@ -26,7 +24,7 @@ public enum UserInputUtil {
 	public String askString(String prompt, boolean hidden, boolean needed) {
 		System.out.println(prompt + (needed ? "" : " (ENTER to skip)"));
 		String input;
-		while ("".equals(input = getNextLine(hidden)) && needed) {
+		while ("".equals(input = reader.getNextLine(hidden)) && needed) {
 			System.out.println("Invalid value - Empty input");
 		}
 		return input;
@@ -42,10 +40,26 @@ public enum UserInputUtil {
 	 * @return
 	 */
 	public Integer askInteger(String prompt, boolean hidden, boolean needed, Integer minValue, Integer maxValue) {
+		return askNumber(prompt, hidden, needed, minValue, maxValue, ((s) -> Integer.parseInt(s)));
+	}
+	
+	/**
+	 * Asks the user to enter a long value
+	 * @param prompt
+	 * @param hidden
+	 * @param needed
+	 * @param minValue
+	 * @param maxValue
+	 * @return
+	 */
+	public Long askLong(String prompt, boolean hidden, boolean needed, Long minValue, Long maxValue) {
+		return askNumber(prompt, hidden, needed, minValue, maxValue, ((s) -> Long.parseLong(s)));
+	}
 
+	private <T extends Comparable<T>> T askNumber(String prompt, boolean hidden, boolean needed, T minValue, T maxValue, Function<String, T> parser) {
 		System.out.println(prompt + (needed ? "" : " (ENTER to skip)"));
 		while (true) {
-			String inputStr = getNextLine(hidden);
+			String inputStr = reader.getNextLine(hidden);
 			if ("".equals(inputStr)) {
 				if (!needed) {
 					return null;
@@ -54,24 +68,48 @@ public enum UserInputUtil {
 				continue;
 			}
 
-			Integer val;
+			T val;
 			try {
-				val = Integer.parseInt(inputStr);
-			} catch (NumberFormatException e) {
+				val = parser.apply(inputStr);
+			} catch (Exception e) {
 				System.out.println("Invalid value - Not a number");
 				continue;
 			}
 
-			if (minValue != null && val < minValue) {
+			if (minValue != null && val.compareTo(minValue) < 0) {
 				System.out.println("Invalid value - Minimum value : " + minValue);
 				continue;
 			}
-			if (maxValue != null && val > maxValue) {
+			if (maxValue != null && val.compareTo(maxValue) > 0) {
 				System.out.println("Invalid value - Maximum value : " + maxValue);
 				continue;
 			}
 
 			return val;
+		}
+	}
+	
+	public Boolean askBoolean(String prompt, String trueVal, String falseVal, boolean hidden, boolean needed) {
+		System.out.println(prompt + " (" + trueVal + " / " + falseVal + ")" + (needed ? "" : " (ENTER to skip)"));
+		while (true) {
+			String inputStr = reader.getNextLine(hidden);
+			if ("".equals(inputStr)) {
+				if (!needed) {
+					return null;
+				}
+				System.out.println("Invalid value - Empty input");
+				continue;
+			}
+			
+			if (trueVal.equalsIgnoreCase(inputStr)) {
+				return true;
+			}
+			if (falseVal.equalsIgnoreCase(inputStr)) {
+				return false;
+			}
+
+			System.out.println("Invalid value");
+			continue;
 		}
 	}
 
@@ -87,8 +125,8 @@ public enum UserInputUtil {
 		System.out.println(prompt + " (format : " + format + ")" + (needed ? "" : " (ENTER to skip)"));
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
 		while (true) {
-			String inputStr = getNextLine(hidden);
-			
+			String inputStr = reader.getNextLine(hidden);
+
 			if ("".equals(inputStr)) {
 				if (!needed) {
 					return null;
@@ -134,7 +172,7 @@ public enum UserInputUtil {
 		while (true) {
 			System.out.println("Your choice ? " + (quitOption ? "(q to quit)" : ""));
 
-			String choiceStr = getNextLine(false);
+			String choiceStr = reader.getNextLine(false);
 
 			if (quitOption && "q".equalsIgnoreCase(choiceStr)) {
 				return null;
@@ -156,13 +194,6 @@ public enum UserInputUtil {
 			return choices.get(choiceIndex).getChoiceObj();
 		}
 
-	}
-
-	/**
-	 * returns the next user input (and hides it if needed)
-	 */
-	private String getNextLine(boolean hidden) {
-		return hidden ? new String(console.readPassword()) : console.readLine();
 	}
 
 }

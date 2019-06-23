@@ -2,8 +2,8 @@ package fr.lewon.client.util.parameters.impl;
 
 import java.io.File;
 
-import fr.lewon.client.exceptions.ParameterizedAppException;
 import fr.lewon.client.exceptions.FileDoesNotExistException;
+import fr.lewon.client.exceptions.ParameterizedAppException;
 import fr.lewon.client.exceptions.ParentDirDoesNotExist;
 import fr.lewon.client.util.parameters.Parameter;
 
@@ -29,9 +29,8 @@ public abstract class AbstractFileParameter extends Parameter {
 		if (!f.exists()) {
 			if (mustExist) {
 				throw new FileDoesNotExistException(this);
-			} else {
-				initFile(f);
-			}
+			} 
+			initFile(f);
 		}
 
 		processAdditionalVerifications(f);

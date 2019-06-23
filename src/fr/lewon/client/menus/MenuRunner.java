@@ -1,16 +1,17 @@
 package fr.lewon.client.menus;
 
 import fr.lewon.client.exceptions.ParameterizedAppException;
+import fr.lewon.client.util.input.UserInputReader;
 
 public enum MenuRunner {
 
 	INSTANCE;
 	
-	public void runMenu(Menu root) throws ParameterizedAppException {
-		AbstractMenu previousMenu = null;
-		AbstractMenu nextMenu = root;
+	public <T extends UserInputReader> void runMenu(Menu<T> root) throws ParameterizedAppException {
+		AbstractMenu<T> previousMenu = null;
+		AbstractMenu<T> nextMenu = root;
 		while (nextMenu != null) {
-			AbstractMenu previousMenuTmp = nextMenu;
+			AbstractMenu<T> previousMenuTmp = nextMenu;
 			nextMenu = nextMenu.run(previousMenu);
 			previousMenu = previousMenuTmp;
 		}
