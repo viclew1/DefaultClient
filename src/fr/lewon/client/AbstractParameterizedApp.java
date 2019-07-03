@@ -38,11 +38,12 @@ public abstract class AbstractParameterizedApp {
 	 * <li>Calls {@link #init()}</li>
 	 * <li>Calls {@link #run()}</li>
 	 * </ul>
+	 * @param args The app parameters
 	 * @throws ParameterizedAppException 
 	 */
-	public void launch() throws ParameterizedAppException {
+	public void launch(String[] args) throws ParameterizedAppException {
 		init();
-		run();
+		run(args);
 	}
 	
 	/**
@@ -64,7 +65,9 @@ public abstract class AbstractParameterizedApp {
 	/**
 	 * Should contain the actions the client should execute once everything is successfully initialized
 	 * 
+	 * @param args The app parameters
+	 * 
 	 * @throws ParameterizedAppException
 	 */
-	protected abstract void run() throws ParameterizedAppException;
+	protected abstract void run(String[] args) throws ParameterizedAppException;
 }
