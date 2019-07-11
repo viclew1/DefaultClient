@@ -19,17 +19,13 @@ public abstract class Parameter {
 	
 	public boolean initParameter(Properties props) {
 		this.value = props.getProperty(key);
-		if (this.value == null && this.required) {
-			return false;
-		}
-		return true;
+		return this.value != null || !this.required;
 	}
 
 	public void verify() throws ParameterizedAppException {
-		if (getValue() == null && !isRequired()) {
-			return;
+		if (getValue() != null || isRequired()) {
+			processVerifications();
 		}
-		processVerifications();
 	}
 	
 	protected abstract void processVerifications() throws ParameterizedAppException;
